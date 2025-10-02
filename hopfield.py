@@ -151,6 +151,7 @@ def main():
     ruta_dos = "dataset/o.txt"
     ruta_tres = "dataset/u.txt"
     ruta_x = "dataset/x.txt"
+    ruta_x2 = "dataset/x2.txt"
 
     # 1. lectura de patrones
     x1 = leer_patron_txt(ruta_uno)
@@ -181,17 +182,27 @@ def main():
     W = diagonal_matrix(W)
 
     # 7. leer patrón de entrada 
+    #coincide
+    x2_in = leer_patron_txt(ruta_x2)
+    x2_in_r = reshape(x2_in)
+    x2_in_r = replace_zeros(x2_in_r)
+    #no coincide
     x_in = leer_patron_txt(ruta_x)
     x_in_r = reshape(x_in)
     x_in_r = replace_zeros(x_in_r)
 
-    mostrar_patron(x_in_r[0], filas, columnas, "Patrón de entrada")
+    mostrar_patron(x_in_r[0], filas, columnas, "Patrón de entrada (no coincidente)")
 
     # 8. ejecutar la función para reconocimiento 
     resultado = reconocer_patron_iterativo(x_in_r, W)
 
     mostrar_patron(resultado, filas, columnas, "Patrón reconocido")
 
+    # 8.2 ejecutar la función para reconocimiento 
+    resultado2 = reconocer_patron_iterativo(x2_in_r, W)
+
+    mostrar_patron(resultado2, filas, columnas, "Patrón reconocido")
+    mostrar_patron(x2_in_r[0], filas, columnas, "Patrón de entrada (coincidente)")
 
 if __name__ == "__main__":
     main()
